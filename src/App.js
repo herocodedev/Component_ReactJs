@@ -9,12 +9,12 @@ class App extends React.Component {
   }
 
   getData = () => {
-    fetch('https://randomuser.me/api/results=5')
-    .then(response => response.json())
-    .then(result => {
-      console.log(result)
-    })
-    .catch(err => console.log(err))
+    fetch("https://randomuser.me/api/?results=5")
+      .then(res => res.json())
+      .then(result => {
+        console.log(result)
+      })
+      .catch(err => console.log(err))
   };
   render() {
     return (
