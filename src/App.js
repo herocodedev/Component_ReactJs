@@ -1,50 +1,54 @@
-import './App.css';
+import "./App.css";
 import React from "react";
-// import { Router, Route,Switch,Link, browserHistory, IndexRoute } from 'react-router'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import ReactDom from "react-dom";
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: [],flag:1, };
+  }
 
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
-function App() {
-  return (
-    <div className="App">
-      <Router>
+  addTaskHandler = () => {
+    const item = 'Set Item...'
+    this.state.data.push(item)
+    let newData = this.state.data
+    this.setState({data: newData})
+  }
+
+  forceUpdateHandler = () =>{
+    this.forceUpdate()
+  }
+
+  findDomNodeHandler = () => {
+    const textEl = document.querySelector('.text')
+    if(this.state.flag==1){
+      ReactDom.findDOMNode(textEl).style.color = 'green'
+      this.setState({flag:0})
+    }else{
+      ReactDom.findDOMNode(textEl).style.color = 'red'
+      this.setState({flag:1})
+    }
+    
+
+  }
+
+  render() {
+    return(
+      <div>
+        <button onClick = {() => this.addTaskHandler()}>Thêm Task</button>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
-
-          <hr />
-
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/contact">
-              <Contact />
-            </Route>
-          </Switch>
+          {this.state.data.map((val) => {
+            return val
+          })}
         </div>
-      </Router>
-    </div>
-  );
+        <button onClick = {() => this.forceUpdateHandler()}>Random Number</button>
+        <div>{Math.random()}</div>
+
+        <button onClick = {() => this.findDomNodeHandler()}>Đổi Màu Chữ</button>
+        <div className="text">Node</div>
+
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
