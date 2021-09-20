@@ -1,5 +1,11 @@
 .App {
-  text-align: center;
+  text-align: left;
+}
+
+.MyBox {
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px #888888;
 }
 
 .App-logo {
